@@ -1,6 +1,5 @@
 const express = require('express');
 const livrosController = require('../controller/livros_controller');
-const { buscarPorAutor } = require('../repository/livros_repository');
 const router = express.Router();
 
 router.param('id', (req, res, next, val) => {
@@ -15,6 +14,5 @@ router
   .get(livrosController.buscarPorId)
   .put(livrosController.atualizar)
   .delete(livrosController.deletar);
-
 
 module.exports = router;

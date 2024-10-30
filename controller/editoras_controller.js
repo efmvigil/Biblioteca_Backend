@@ -1,8 +1,8 @@
-const livrosService = require('../service/livros_service');
+const editorasService = require('../service/editoras_service');
 
 exports.listar = async function (req, res) {
   try {
-    const result = await livrosService.listar();
+    const result = await editorasService.listar();
     res.send(result);
   } catch (err) {
     res.send(err);
@@ -11,7 +11,7 @@ exports.listar = async function (req, res) {
 
 exports.inserir = async function (req, res) {
   try {
-    const result = await livrosService.inserir(req.body);
+    const result = await editorasService.inserir(req.body);
     res.status(201).send(result);
   } catch (err) {
     res.status(err.codigo).send(err);
@@ -20,7 +20,7 @@ exports.inserir = async function (req, res) {
 
 exports.buscarPorId = async function (req, res) {
   try {
-    const result = await livrosService.buscarPorId(req.id);
+    const result = await editorasService.buscarPorId(req.id);
     res.send(result);
   } catch (err) {
     res.status(err.codigo).send(err);
@@ -29,7 +29,7 @@ exports.buscarPorId = async function (req, res) {
 
 exports.atualizar = async function (req, res) {
   try {
-    const result = await livrosService.atualizar(req.id, req.body);
+    const result = await editorasService.atualizar(req.id, req.body);
     res.send(result);
   } catch (err) {
     res.status(err.codigo).send(err);
@@ -38,7 +38,7 @@ exports.atualizar = async function (req, res) {
 
 exports.deletar = async function (req, res) {
   try {
-    const result = await livrosService.deletar(req.id);
+    const result = await editorasService.deletar(req.id);
     res.send(result);
   } catch (err) {
     res.status(err.codigo).send(err);

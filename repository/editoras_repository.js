@@ -2,7 +2,7 @@ const client = require('./database');
 
 exports.listar = async function () {
   try {
-    const res = await client.query('SELECT * FROM livros');
+    const res = await client.query('SELECT * FROM editoras');
     return res.rows;
   } catch (err) {
     throw {
@@ -16,7 +16,7 @@ exports.listar = async function () {
 exports.inserir = async function (obj) {
   try {
     const res = await client.query(
-      'INSERT into livros (titulo, autor, isbn, ano, edicao, editora, usuario) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      'INSERT into editoras (nome, nacionalidade) VALUES ($1, $2) RETURNING *',
       Object.values(obj)
     );
     return res.rows[0];
@@ -31,7 +31,9 @@ exports.inserir = async function (obj) {
 
 exports.buscarPorId = async function (id) {
   try {
-    const res = await client.query('SELECT * FROM livros WHERE id = $1', [id]);
+    const res = await client.query('SELECT * FROM editoras WHERE id = $1', [
+      id,
+    ]);
     return res.rows[0];
   } catch (err) {
     throw {
@@ -45,7 +47,7 @@ exports.buscarPorId = async function (id) {
 exports.atualizar = async function (id, obj) {
   try {
     const res = await client.query(
-      'UPDATE livros SET titulo = $1, autor = $2, isbn = $3, ano = $4, edicao = $5, editora = $6, usuario = $7 WHERE id = $8 RETURNING *',
+      'UPDATE editoras SET nome = $1, nacionalidade = $2 WHERE id = $3 RETURNING *',
       [...Object.values(obj), id]
     );
     return res.rows[0];
@@ -61,7 +63,7 @@ exports.atualizar = async function (id, obj) {
 exports.deletar = async function (id) {
   try {
     const res = await client.query(
-      'DELETE FROM livros WHERE id = $1 RETURNING *',
+      'DELETE FROM editoras WHERE id = $1 RETURNING *',
       [id]
     );
     return res.rows[0];
