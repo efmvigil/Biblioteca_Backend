@@ -2,12 +2,12 @@ const client = require('./database');
 
 exports.listar = async function () {
   try {
-    const res = await client.query('SELECT * FROM bibliotecarios');
+    const res = await client.query('SELECT * FROM ibliotecarios');
     return res.rows;
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na consulta de dados',
     };
   }
@@ -23,7 +23,7 @@ exports.inserir = async function (obj) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na inserção de dados',
     };
   }
@@ -39,7 +39,7 @@ exports.buscarPorId = async function (id) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na consulta de dados',
     };
   }
@@ -55,7 +55,7 @@ exports.atualizar = async function (id, obj) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na atualização de dados',
     };
   }
@@ -64,14 +64,14 @@ exports.atualizar = async function (id, obj) {
 exports.deletar = async function (id) {
   try {
     const res = await client.query(
-      'DELETE FROM bibliotecarios WHERE id = $1 RETURNING *',
+      'UPDATE bibliotecarios SET D_E_L_E_T_E = true WHERE id = $1 RETURNING *',
       [id]
     );
     return res.rows[0];
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na remoção de dados',
     };
   }

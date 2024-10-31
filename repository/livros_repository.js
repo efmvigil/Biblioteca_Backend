@@ -7,7 +7,7 @@ exports.listar = async function () {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na consulta de dados',
     };
   }
@@ -23,7 +23,7 @@ exports.inserir = async function (obj) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na inserção de dados',
     };
   }
@@ -36,7 +36,7 @@ exports.buscarPorId = async function (id) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na consulta de dados',
     };
   }
@@ -52,7 +52,7 @@ exports.atualizar = async function (id, obj) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na atualização de dados',
     };
   }
@@ -68,7 +68,7 @@ exports.deletar = async function (id) {
   } catch (err) {
     throw {
       status: 'erro',
-      codigo: `${err.code}`,
+      codigo: 500,
       msg: 'Falha na remoção de dados',
     };
   }

@@ -16,6 +16,6 @@ router
   .route('/:id')
   .get(bibliotecariosController.buscarPorId)
   .put(bibliotecariosController.atualizar)
-  .delete(bibliotecariosController.deletar);
+  .patch(bibliotecariosController.deletar);
 
 module.exports = router;
