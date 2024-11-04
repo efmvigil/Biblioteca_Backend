@@ -2,7 +2,7 @@ const client = require('./database');
 
 exports.listar = async function () {
   try {
-    const res = await client.query('SELECT * FROM ibliotecarios');
+    const res = await client.query('SELECT * FROM bibliotecarios');
     return res.rows;
   } catch (err) {
     throw {
