@@ -6,6 +6,7 @@ const livrosRouter = require('./router/livros_router');
 const editorasRouter = require('./router/editoras_router');
 const bibliotecariosRouter = require('./router/bibliotecarios_router');
 const livrosRetiradosRouter = require('./router/livrosRetirados_router');
+const autoresRouter = require('./router/autores_router')
 
 app.use(express.json());
 
@@ -14,6 +15,8 @@ app.use('/api/livros', livrosRouter);
 app.use('/api/editoras', editorasRouter);
 
 app.use('/api/bibliotecarios', bibliotecariosRouter);
+
+app.use('/api/autores', autoresRouter);
 
 app.use('/api/livrosRetirados', livrosRetiradosRouter);
 
