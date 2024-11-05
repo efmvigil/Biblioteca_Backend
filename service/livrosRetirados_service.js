@@ -5,16 +5,9 @@ exports.listar = async function () {
 };
 
 exports.inserir = async function (livroRetirado) {
-  if (
-    livroRetirado.livro &&
-    livroRetirado.usuario &&
-    livroRetirado.data_retirada &&
-    livroRetirado.data_devolucao &&
-    livroRetirado.data_devolvido &&
-    livroRetirado.multa) {
+  if (livroRetirado) {
     return livrosRetiradosRepository.inserir(livroRetirado);
   } else {
-    console.log('teste',livroRetirado)
     throw {
       status: 'erro',
       codigo: 400,
@@ -37,15 +30,7 @@ exports.buscarPorId = async function (id) {
 exports.atualizar = async function (id, atualizacao) {
   const livroRetiradoEncontrado = await livrosRetiradosRepository.buscarPorId(id);
   if (livroRetiradoEncontrado) {
-    if (
-      atualizacao &&
-      atualizacao.Livro &&
-      atualizacao.Usuario &&
-      atualizacao.Data_Retirada &&
-      atualizacao.Data_Devolucao &&
-      atualizacao.Data_Devolvido &&
-      atualizacao.Multa !== undefined
-    ) {
+    if (atualizacao ) {
       return livrosRetiradosRepository.atualizar(id, atualizacao);
     } else {
       throw {

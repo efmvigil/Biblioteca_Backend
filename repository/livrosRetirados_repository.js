@@ -84,6 +84,18 @@ exports.buscarPorId = async function (id) {
 
 exports.atualizar = async function (id, obj) {
   try {
+        if (obj.data_retirada) {
+          obj.data_retirada = dataEua(obj.data_retirada);
+        }
+        console.log(obj.data_retirada)
+        if (obj.data_devolucao) {
+          obj.data_devolucao = dataEua(obj.data_devolucao);
+
+        }
+        if (obj.data_devolvido) {
+          obj.data_devolvido = dataEua(obj.data_devolvido);
+        }
+        
     const res = await client.query(
       'UPDATE livros_retirados SET Livro = $1, Usuario = $2, Data_Retirada = $3, Data_Devolucao = $4, Data_Devolvido = $5, Multa = $6 WHERE id = $7 RETURNING *',
       [...Object.values(obj), id]
