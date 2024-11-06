@@ -43,7 +43,6 @@ CREATE TABLE Livros (
     Edicao VARCHAR(50),
     Imagem VARCHAR(255),
     Editora INT, -- Foreign Key para a tabela Editora
-    Usuario INT, -- Foreign Key para a tabela Usuarios
     CONSTRAINT fk_autor FOREIGN KEY (Autor) REFERENCES Autores(ID),
     CONSTRAINT fk_editora FOREIGN KEY (Editora) REFERENCES Editora(ID),
     CONSTRAINT fk_usuario FOREIGN KEY (Usuario) REFERENCES Usuarios(ID));
@@ -60,3 +59,7 @@ CREATE TABLE Livros_Retirados (
     CONSTRAINT fk_livro FOREIGN KEY (Livro) REFERENCES Livros(ID),
     CONSTRAINT fk_usuario_livro FOREIGN KEY (Usuario) REFERENCES Usuarios(ID)
 );
+
+-- TIRAR USUARIOS DE LIVROS
+--ALTER TABLE livro DROP CONSTRAINT fk_usuario;
+--ALTER TABLE livros DROP COLUMN usuario;

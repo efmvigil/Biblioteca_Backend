@@ -35,7 +35,14 @@ exports.atualizar = async function (req, res) {
     res.status(err.codigo || 500).send(err);
   }
 };
-
+exports.devolver = async function (req, res) {
+  try {
+    const result = await livrosRetiradosService.retirar(req.params.id, req.body);
+    res.send(result);
+  } catch (err) {
+    res.status(err.codigo || 500).send(err);
+  }
+};
 exports.deletar = async function (req, res) {
   try {
     const result = await livrosRetiradosService.deletar(req.params.id);

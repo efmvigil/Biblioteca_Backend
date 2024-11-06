@@ -12,6 +12,7 @@ router.route('/').get(livrosRetiradosController.listar).post(livrosRetiradosCont
 router
   .route('/:id')
   .get(livrosRetiradosController.buscarPorId)
+  .patch(livrosRetiradosController.devolver)
   .put(livrosRetiradosController.atualizar)
   .delete(livrosRetiradosController.deletar);
 

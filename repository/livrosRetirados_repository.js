@@ -9,6 +9,20 @@ function dataEua(data) {
   const [dia, mes, ano] = data.split('/');
   return `${ano}/${mes}/${dia}`;
 }
+function dataBanco(data) {
+  const [dia, mes, ano] = data.split('/');
+  return `${ano}-${mes}-${dia}`;
+}
+function CalcMulta(dataDevolucao, dataDevolvido) {
+  const multaPorDia = 0.50;
+
+  const timeDevolucao = dataDevolucao.getTime();
+  const timeDevolvido = dataDevolvido.getTime();
+
+  const diferencaDias = Math.ceil((timeDevolvido - timeDevolucao) / (1000 * 60 * 60 * 24));
+
+  return diferencaDias > 0 ? diferencaDias * multaPorDia : 0.0;
+}
 
 exports.listar = async function () {
   try {
@@ -55,6 +69,45 @@ exports.inserir = async function (obj) {
       status: 'erro',
       codigo: 500,
       msg: 'Falha na inserção de dados',
+    };
+  }
+};
+exports.retirar = async function (id, devolvido) {
+  try {
+    const res = await client.query('SELECT data_retirada, data_devolucao, data_devolvido FROM livros_retirados WHERE id = $1', [id]);
+    const registro = res.rows[0];
+
+    if (!registro) {
+      throw {
+        status: 'erro',
+        codigo: 404,
+        msg: 'Registro de retirada não encontrado',
+      };
+    } else if (registro.data_devolvido !== null) {
+      throw {
+        status: 'info',
+        codigo: 104,
+        msg: 'Registro já possui Data de Devolução',
+      };
+    }
+
+    dataDevolvido = dataBanco(devolvido.data_devolvido)
+    const dataDevolucao = registro.data_devolucao.toISOString().split('T')[0];
+    // Calcular a multa
+    const multa = dataDevolvido ? CalcMulta(new Date(dataDevolucao), new Date(dataDevolvido)) : 0.0;
+    
+    const resAtualizado = await client.query(
+      'UPDATE livros_retirados SET data_devolvido = $1, multa = $2 WHERE id = $3 RETURNING *',
+      [devolvido.data_devolvido || null, multa, id]
+    );
+
+    return resAtualizado.rows[0];
+  } catch (err) {
+    // Lançar erro detalhado
+    throw err.status ? err : {
+      status: 'erro',
+      codigo: 500,
+      msg: `Falha na atualização de dados: ${err.message}`,
     };
   }
 };

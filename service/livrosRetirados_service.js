@@ -16,6 +16,17 @@ exports.inserir = async function (livroRetirado) {
   }
 };
 
+exports.retirar = async function (id,devolvido) {
+  if (devolvido) {
+    return livrosRetiradosRepository.retirar(id,devolvido);
+  } else {
+    throw {
+      status: 'erro',
+      codigo: 400,
+      msg: 'Livro retirado inserido com dados incorretos',devolvido
+    };
+  }
+};
 exports.buscarPorId = async function (id) {
   const livroRetiradoEncontrado = await livrosRetiradosRepository.buscarPorId(id);
   if (livroRetiradoEncontrado) return livroRetiradoEncontrado;
