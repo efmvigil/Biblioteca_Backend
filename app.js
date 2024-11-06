@@ -6,11 +6,13 @@ const livrosRouter = require('./router/livros_router');
 const editorasRouter = require('./router/editoras_router');
 const bibliotecariosRouter = require('./router/bibliotecarios_router');
 const livrosRetiradosRouter = require('./router/livrosRetirados_router');
-const autoresRouter = require('./router/autores_router')
-const usuariosRouter = require('./router/usuarios_router')
-
+const autoresRouter = require('./router/autores_router');
+const usuariosRouter = require('./router/usuarios_router');
+const authRouter = require('./router/auth_router');
 
 app.use(express.json());
+
+app.use('/', authRouter);
 
 app.use('/api/livros', livrosRouter);
 

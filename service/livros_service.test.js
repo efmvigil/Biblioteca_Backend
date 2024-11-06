@@ -12,7 +12,7 @@ test('listar - deve retornar uma lista de livros', async () => {
     { id: 1, titulo: 'Livro 1' },
     { id: 2, titulo: 'Livro 2' },
   ];
-  livrosRepository.listar.mockResolvedValue(mockLivros); // Mock retornando uma Promise resolvida
+  livrosRepository.listar.mockResolvedValue(mockLivros);
 
   const result = await livrosService.listar();
 
