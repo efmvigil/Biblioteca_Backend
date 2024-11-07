@@ -19,8 +19,8 @@ exports.infos = async function () {
   return await livrosRetiradosRepository.infos();
 };
 
-exports.listarLporU = async function () {
-  return await livrosRetiradosRepository.listarLporU();
+exports.listarLporU = async function (id) {
+  return await livrosRetiradosRepository.listarLporU(id);
 };
 
 exports.retirar = async function (id,devolvido) {

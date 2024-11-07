@@ -1,5 +1,7 @@
 const express = require('express');
 const livrosRetiradosController = require('../controller/livrosRetirados_controller');
+const authController = require('../controller/auth_controller');
+
 const router = express.Router();
 
 router.param('id', (req, res, next, val) => {
@@ -9,7 +11,7 @@ router.param('id', (req, res, next, val) => {
 
 router.route('/infos').get(livrosRetiradosController.infos);
 
-router.route('/listarLporU').get(livrosRetiradosController.listarLporU);
+router.route('/listarLporU/:id').get(authController.autenticarToken, livrosRetiradosController.listarLporU);
 
 router.route('/').get(livrosRetiradosController.listar).post(livrosRetiradosController.inserir);
 

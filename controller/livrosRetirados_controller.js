@@ -19,7 +19,7 @@ exports.infos = async function (req, res) {
 };
 exports.listarLporU = async function (req, res) {
   try {
-    const result = await livrosRetiradosService.listarLporU();
+    const result = await livrosRetiradosService.listarLporU(req.params.id);
     res.send(result);
   } catch (err) {
     res.status(500).send(err);

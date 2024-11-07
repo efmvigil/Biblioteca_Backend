@@ -140,7 +140,7 @@ exports.infos = async function () {
   }
 };
 
-exports.listarLporU = async function () {
+exports.listarLporU = async function (id) {
   try {
     const res = await client.query(`
     SELECT 
@@ -154,8 +154,8 @@ exports.listarLporU = async function () {
       Usuarios u ON lr.Usuario = u.ID
     JOIN 
       Livros l ON lr.Livro = l.ID
-    where u.id = 1 
-      `);
+    where u.id = $1 
+      `,[id]);
 
     console.log('Resultado da consulta:', res.rows); 
     return res.rows;
