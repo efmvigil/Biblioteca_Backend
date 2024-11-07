@@ -112,6 +112,63 @@ exports.retirar = async function (id, devolvido) {
   }
 };
 
+exports.infos = async function () {
+  try {
+    const res = await client.query(`
+      SELECT 
+        u.Nome AS Nome_Usuario,
+        u.Matricula,
+        l.Titulo AS Nome_Livro,
+        lr.data_devolvido AS Devolvido
+      FROM 
+        Livros_Retirados lr
+      JOIN 
+        Usuarios u ON lr.Usuario = u.ID
+      JOIN 
+        Livros l ON lr.Livro = l.ID;
+    `);
+
+    console.log('Resultado da consulta:', res.rows); // Verifique o conteúdo retornado
+    return res.rows;
+  } catch (err) {
+    console.error('Erro na consulta de livros retirados:', err);
+    throw {
+      status: 'erro',
+      codigo: 500,
+      msg: 'Falha na consulta de dados',
+    };
+  }
+};
+
+exports.listarLporU = async function () {
+  try {
+    const res = await client.query(`
+    SELECT 
+    u.Nome AS Nome_Usuario,
+    u.Matricula,
+    l.Titulo AS Nome_Livro,
+    lr.data_devolvido AS Devolvido
+    FROM 
+      Livros_Retirados lr
+    JOIN 
+      Usuarios u ON lr.Usuario = u.ID
+    JOIN 
+      Livros l ON lr.Livro = l.ID
+    where u.id = 1 
+      `);
+
+    console.log('Resultado da consulta:', res.rows); 
+    return res.rows;
+  } catch (err) {
+    console.error('Erro na consulta de livros retirados:', err);
+    throw {
+      status: 'erro',
+      codigo: 500,
+      msg: 'Falha na consulta de dados',
+    };
+  }
+};
+
 exports.buscarPorId = async function (id) {
   try {
     const res = await client.query('SELECT * FROM livros_retirados WHERE id = $1', [id]);

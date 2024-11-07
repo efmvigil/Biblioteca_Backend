@@ -15,6 +15,13 @@ exports.inserir = async function (livroRetirado) {
     };
   }
 };
+exports.infos = async function () {
+  return await livrosRetiradosRepository.infos();
+};
+
+exports.listarLporU = async function () {
+  return await livrosRetiradosRepository.listarLporU();
+};
 
 exports.retirar = async function (id,devolvido) {
   if (devolvido) {

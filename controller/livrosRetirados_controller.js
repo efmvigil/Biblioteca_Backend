@@ -9,6 +9,23 @@ exports.listar = async function (req, res) {
   }
 };
 
+exports.infos = async function (req, res) {
+  try {
+    const result = await livrosRetiradosService.infos();
+    res.send(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+exports.listarLporU = async function (req, res) {
+  try {
+    const result = await livrosRetiradosService.listarLporU();
+    res.send(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 exports.inserir = async function (req, res) {
   try {
     const result = await livrosRetiradosService.inserir(req.body);

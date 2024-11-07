@@ -7,6 +7,10 @@ router.param('id', (req, res, next, val) => {
   next();
 });
 
+router.route('/infos').get(livrosRetiradosController.infos);
+
+router.route('/listarLporU').get(livrosRetiradosController.listarLporU);
+
 router.route('/').get(livrosRetiradosController.listar).post(livrosRetiradosController.inserir);
 
 router

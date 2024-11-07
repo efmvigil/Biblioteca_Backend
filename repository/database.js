@@ -3,10 +3,10 @@ const { Client } = pg;
 
 const client = new Client({
   user: 'postgres',
-  password: 'macielf35',
+  password: '123456',
   host: 'localhost',
-  port: 5432,
-  database: 'new',
+  port: 5433,
+  database: 'bliblioteca',
 });
 
 client
