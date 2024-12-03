@@ -11,15 +11,18 @@ router.param('id', (req, res, next, val) => {
 
 router.route('/infos').get(livrosRetiradosController.infos);
 
-router.route('/listarLporU/:id').get(authController.autenticarToken, livrosRetiradosController.listarLporU);
+router
+  .route('/listarLporU/:id')
+  .get(authController.autenticarToken, livrosRetiradosController.listarLporU);
 
-router.route('/').get(livrosRetiradosController.listar).post(livrosRetiradosController.inserir);
+router.route('/').get(livrosRetiradosController.listar);
 
 router
   .route('/:id')
   .get(livrosRetiradosController.buscarPorId)
   .patch(livrosRetiradosController.devolver)
   .put(livrosRetiradosController.atualizar)
-  .delete(livrosRetiradosController.deletar);
+  .delete(livrosRetiradosController.deletar)
+  .post(authController.autenticarToken, livrosRetiradosController.inserir);
 
 module.exports = router;
