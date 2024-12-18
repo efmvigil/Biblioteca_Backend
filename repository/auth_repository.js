@@ -15,6 +15,7 @@ exports.registrarUsuario = async function (usuario) {
     throw {
       status: 'erro',
       codigo: 500,
+      erro: err.code,
       msg: 'Falha na inserção de dados do usuario',
     };
   }

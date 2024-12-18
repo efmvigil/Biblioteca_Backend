@@ -1,4 +1,5 @@
 const usuariosRepository = require('../repository/usuarios_repository');
+const bcrypt = require('bcrypt');
 
 // Listar todos os usuários
 exports.listar = async function () {
@@ -49,7 +50,8 @@ exports.atualizar = async function (id, atualizacao) {
       atualizacao.email &&
       atualizacao.telefone
     ) {
-      return usuariosRepository.atualizar(id, atualizacao);
+      atualizacao.senha = await bcrypt.hash(atualizacao.senha, 10);
+      return await usuariosRepository.atualizar(id, atualizacao);
     } else {
       throw {
         status: 'erro',
