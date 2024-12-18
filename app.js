@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const PORT = 3200;
 
 const livrosRouter = require('./router/livros_router');
@@ -9,6 +10,8 @@ const livrosRetiradosRouter = require('./router/livrosRetirados_router');
 const autoresRouter = require('./router/autores_router');
 const usuariosRouter = require('./router/usuarios_router');
 const authRouter = require('./router/auth_router');
+
+app.use(cors());
 
 app.use(express.json());
 

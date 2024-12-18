@@ -45,7 +45,7 @@ exports.logarUsuario = async function (login) {
           SECRET_KEY,
           { expiresIn: '1h' }
         );
-        return { token };
+        return { token: token, idUsuario: usuario.id };
       } else
         throw {
           status: 'erro',
