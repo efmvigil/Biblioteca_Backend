@@ -160,6 +160,7 @@ exports.listarLporU = async function (id) {
     u.Nome AS Nome_Usuario,
     u.Matricula,
     l.Titulo AS Nome_Livro,
+    l.imagem as imagem,
     lr.data_devolvido AS Devolvido
     FROM 
       Livros_Retirados lr
