@@ -140,7 +140,6 @@ exports.infos = async function () {
         Livros l ON lr.Livro = l.ID;
     `);
 
-    console.log('Resultado da consulta:', res.rows); // Verifique o conteúdo retornado
     return res.rows;
   } catch (err) {
     console.error('Erro na consulta de livros retirados:', err);
@@ -173,7 +172,6 @@ exports.listarLporU = async function (id) {
       [id]
     );
 
-    console.log('Resultado da consulta:', res.rows);
     return res.rows;
   } catch (err) {
     console.error('Erro na consulta de livros retirados:', err);
@@ -222,7 +220,7 @@ exports.atualizar = async function (id, obj) {
     if (obj.data_retirada) {
       obj.data_retirada = dataEua(obj.data_retirada);
     }
-    console.log(obj.data_retirada);
+    
     if (obj.data_devolucao) {
       obj.data_devolucao = dataEua(obj.data_devolucao);
     }
@@ -266,12 +264,14 @@ exports.verificarLivroRetirado = async function (id) {
       'SELECT * FROM livros WHERE id = $1 AND id IN (SELECT livro from livros_retirados)',
       [id]
     );
-    return res.rows.length > 0;
+    console.log()
+    return res.rows;
   } catch (err) {
     throw {
       status: 'erro',
       codigo: 500,
-      msg: 'Falha na consulta de dados',
+      msg: 'Falha na consulta de dadosss',
+      idd: id
     };
   }
 };

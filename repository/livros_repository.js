@@ -15,7 +15,6 @@ exports.listar = async function () {
 
 exports.inserir = async function (obj) {
   try {
-    console.log(obj)
     const res = await client.query(
       'INSERT into livros (titulo, autor, isbn, ano, edicao, editora,imagem) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
       Object.values(obj)

@@ -6,25 +6,22 @@ exports.listar = async function () {
 
 exports.inserir = async function (idLivro, idUsuario) {
   if (idLivro && idUsuario) {
-    const verificacao = await livrosRetiradosRepository.verificarLivroRetirado(
-      idLivro
-    );
-    if (!verificacao) {
+    const verificacao = await livrosRetiradosRepository.verificarLivroRetirado(idLivro);
+    console.log("TESTES " + verificacao)
+    if (verificacao == null ||verificacao == "" ) {
       return await livrosRetiradosRepository.inserir(idLivro, idUsuario);
-    } else {
+    }else {
       throw {
         status: 'erro',
         codigo: 409,
-        msg: 'Livro indisponivel para retirada',
-        livro,
+        msg: 'Livro indisponivel para retirada'
       };
     }
   } else {
     throw {
       status: 'erro',
       codigo: 400,
-      msg: 'Erro ao retirar livro',
-      livro,
+      msg: 'Erro ao retirar livro'
     };
   }
 };
