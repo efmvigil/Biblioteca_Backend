@@ -30,11 +30,15 @@ exports.inserir = async function (obj) {
 };
 
 exports.buscarPorId = async function (id) {
+  console.log(id);
   try {
-    const res = await client.query(`select l.titulo, a.nome as autor,l.isbn,l.ano,l.edicao,l.imagem,e.nome as editora from livros l
+    const res = await client.query(
+      `select l.titulo, a.nome as autor,l.isbn,l.ano,l.edicao,l.imagem,e.nome as editora from livros l
 join autores  a on l.autor = a.id
-join editora e on l.editora = e.id
-where l.id = $1`, [id]);
+join editoras e on l.editora = e.id
+where l.id = $1`,
+      [id]
+    );
     return res.rows[0];
   } catch (err) {
     throw {
