@@ -6,22 +6,32 @@ exports.listar = async function () {
 
 exports.inserir = async function (idLivro, idUsuario) {
   if (idLivro && idUsuario) {
-    const verificacao = await livrosRetiradosRepository.verificarLivroRetirado(idLivro);
-    console.log("TESTES " + verificacao)
-    if (verificacao == null ||verificacao == "" ) {
-      return await livrosRetiradosRepository.inserir(idLivro, idUsuario);
-    }else {
+    const verificacao = await livrosRetiradosRepository.verificarLivroRetirado(
+      idLivro
+    );
+    if (verificacao == null || verificacao == '') {
+      const livrosRetiradosUsuario =
+        await livrosRetiradosRepository.listarLporU(idUsuario);
+      if (livrosRetiradosUsuario.length < 3) {
+        return await livrosRetiradosRepository.inserir(idLivro, idUsuario);
+      } else
+        throw {
+          status: 'erro',
+          codigo: 403,
+          msg: 'Não é possível retirar mais de 3 livros ao mesmo tempo',
+        };
+    } else {
       throw {
         status: 'erro',
         codigo: 409,
-        msg: 'Livro indisponivel para retirada'
+        msg: 'Livro indisponivel para retirada',
       };
     }
   } else {
     throw {
       status: 'erro',
       codigo: 400,
-      msg: 'Erro ao retirar livro'
+      msg: 'Erro ao retirar livro',
     };
   }
 };

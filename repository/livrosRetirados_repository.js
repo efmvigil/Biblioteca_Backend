@@ -220,7 +220,7 @@ exports.atualizar = async function (id, obj) {
     if (obj.data_retirada) {
       obj.data_retirada = dataEua(obj.data_retirada);
     }
-    
+
     if (obj.data_devolucao) {
       obj.data_devolucao = dataEua(obj.data_devolucao);
     }
@@ -264,14 +264,14 @@ exports.verificarLivroRetirado = async function (id) {
       'SELECT * FROM livros WHERE id = $1 AND id IN (SELECT livro from livros_retirados)',
       [id]
     );
-    console.log()
+    console.log();
     return res.rows;
   } catch (err) {
     throw {
       status: 'erro',
       codigo: 500,
       msg: 'Falha na consulta de dadosss',
-      idd: id
+      idd: id,
     };
   }
 };
