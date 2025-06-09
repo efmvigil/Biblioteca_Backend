@@ -56,6 +56,7 @@ exports.retirar = async function (id, devolvido) {
     };
   }
 };
+
 exports.buscarPorId = async function (id) {
   const livroRetiradoEncontrado = await livrosRetiradosRepository.buscarPorId(
     id

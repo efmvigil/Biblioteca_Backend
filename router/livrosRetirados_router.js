@@ -20,9 +20,8 @@ router.route('/').get(livrosRetiradosController.listar);
 router
   .route('/:id')
   .get(livrosRetiradosController.buscarPorId)
-  .patch(livrosRetiradosController.devolver)
   .put(livrosRetiradosController.atualizar)
-  .delete(livrosRetiradosController.deletar)
+  .delete(livrosRetiradosController.devolver)
   .post(authController.autenticarToken, livrosRetiradosController.inserir);
 
 module.exports = router;

@@ -45,7 +45,7 @@ CREATE TABLE Livros (
     Editora INT, -- Foreign Key para a tabela Editora
     CONSTRAINT fk_autor FOREIGN KEY (Autor) REFERENCES Autores(ID),
     CONSTRAINT fk_editora FOREIGN KEY (Editora) REFERENCES Editora(ID);
-
+)
 -- Tabela de Livros Retirados
 CREATE TABLE Livros_Retirados (
     ID SERIAL PRIMARY KEY,

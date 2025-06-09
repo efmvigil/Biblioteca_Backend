@@ -158,6 +158,7 @@ exports.listarLporU = async function (id) {
     SELECT 
     u.Nome AS Nome_Usuario,
     u.Matricula,
+    lr.id,
     l.Titulo AS Nome_Livro,
     l.imagem as imagem,
     lr.data_devolvido AS Devolvido
